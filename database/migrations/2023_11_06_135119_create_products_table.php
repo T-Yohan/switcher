@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_visible')->default(false);
             $table->boolean('is_new')->default(false);
             $table->boolean('is_best')->default(false);
+            $table->decimal('price', 10,2)->nullable();
             $table->date('published_at')->nullable();
             $table->timestamps();
         });
