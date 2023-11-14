@@ -30,7 +30,7 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    //un produit a unue categorie
+    //un produit a une categorie
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
