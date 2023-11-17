@@ -1,53 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>SWITCHER</h1>
-
-        <label for="category_id">Filtrer par catégorie :</label>
-        {{-- <select name="category_id" id="category_id">
-            <option value="">Toutes les catégories</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
-        </select> --}}
-        @foreach ($categories as $category)
-            <a href="{{ Route('categories.index', $category) }}">{{ $category->name }}</a>
-        @endforeach
-        {{-- <button type="submit">Filtrer</button> --}}
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Nom du produit</th>
-                    <th>Description</th>
-                    <th>Catégorie</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <td class="border p-2">
-                            <img src="{{ mix('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16">
-                        </td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->description }}</td>
-                        <td>{{ $product->category->name }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <!-- Affichage de la pagination -->
-        {{ $products->links() }}
-    </div>
-    <!-- tailwind.config.js -->
-    module.exports = {};
-
-
-
-    <!-- component -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <div x-data="{ cartOpen: false, isOpen: false }" class="bg-white">
         <header>
@@ -117,6 +70,7 @@
 
         <main class="my-8">
             <div class="container mx-auto px-6">
+
                 <div class="h-64 rounded-md overflow-hidden bg-cover bg-center"
                     style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')">
                     <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
@@ -124,7 +78,7 @@
                             <h2 class="text-2xl text-white font-semibold">Catégories</h2>
                             <button
                                 class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                                <span>choisissez une catégorie</span>
+                                <span>sélectionnez une catégorie</span>
                                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -145,7 +99,7 @@
                                         <p class="mt-2 text-gray-400">{{ $category->description }}</p>
                                         <button
                                             class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none">
-                                            <span>Choisir</span>
+                                            <span><a href="{{ Route('categories.index', $category) }}"> Entrer </a></span>
                                             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round"
                                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                                 stroke="currentColor">
@@ -158,14 +112,17 @@
                         </div>
                     @endforeach
 
-                <div class=" flex flex-wrap align-middle justify-center mt-16">
+                <div class="mt-16">
+
                     @foreach ($products as $product)
-                        <h3 class="text-gray-600 text-2xl font-medium"> </h3>
+                        <h3 class="text-gray-600 text-2xl font-medium"> {{ $product->category->name }} </h3>
                         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
                             <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                                 <div class="flex items-end justify-end h-56 w-full bg-cover"
                                     style="background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80')">
-
+                                <select aria-label="Select quantity" class="p-1 rounded-full border-gray-200 mb-5 focus:outline-none dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                                    <option> {{$product->qty}} </option>
+                                </select>
                                             <path
                                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
                                             </path>
@@ -176,9 +133,6 @@
                                     <h3 class="text-gray-700 uppercase">{{ $product->name }}</h3>
                                     <p class="mt-2 text-gray-400">{{ $product->description }}</p>
                                     <span class="text-gray-500 mt-2">$ {{ $product->price }} </span>
-                                    <select aria-label="Select quantity" class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                        <option> {{$product->qty}} </option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
