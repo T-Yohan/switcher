@@ -32,8 +32,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('accueil');
     Route::get('/category/{id}', [HomeController::class, 'category'])->name('categories.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/search-products', [ProductController::class, 'search'])->name('search-products');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}', [ProductController::class, 'byCategory'])->name('products.category');
     Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 });
 

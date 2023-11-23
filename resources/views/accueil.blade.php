@@ -21,14 +21,6 @@
                         SWITCHER
                     </div>
                     <div class="flex items-center justify-end w-full">
-                        <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none mx-4 sm:mx-0">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                </path>
-                            </svg>
-                        </button>
 
                         <div class="flex sm:hidden">
                             <button @click="isOpen = !isOpen" type="button"
@@ -45,28 +37,26 @@
                 </div>
                 <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
                     <div class="flex flex-col sm:flex-row">
-                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="/">Home</a>
-                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="/categories">Categories</a>
-                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="/products">Products</a>
-                        {{-- <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Contact</a>
-                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">About</a> --}}
+                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{Route('accueil')}}">Home</a>
+                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{Route('categories.index')}}">Categories</a>
+                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{Route('products.index')}}">Products</a>
                     </div>
                 </nav>
                 <div class="relative mt-6 max-w-lg mx-auto">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                    <input
-                        class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                        type="text" placeholder="rechercher un produit">
+                        <form action="{{ route('search-products') }}" method="GET" class="flex items-center">
+                            <input class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
+                                type="text" name="search" placeholder="Rechercher un produit">
+                            <button type="submit" class="ml-2 p-2 rounded-full bg-blue-500 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-6 w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 10-14 0 7 7 0 0014 0z"/>
+                                </svg>
+                            </button>
+                        </form>
                 </div>
             </div>
         </header>
-
 
         <main class="my-8">
             <div class="container mx-auto px-6">
@@ -76,14 +66,35 @@
                     <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
                         <div class="px-10 max-w-xl">
                             <h2 class="text-2xl text-white font-semibold">Catégories</h2>
-                            <button
-                                class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                                <span>sélectionnez une catégorie</span>
-                                <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
+
+                            <a href="{{ route('categories.index') }}"
+                            class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                            <span>sélectionnez une catégorie</span>
+                            <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+                <div class="h-64 rounded-md mt-5 overflow-hidden bg-cover bg-center"
+                    style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')">
+                    <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
+                        <div class="px-10 max-w-xl">
+                            <h2 class="text-2xl text-white font-semibold">Produits</h2>
+
+                            <a href="{{ route('products.index') }}"
+                            class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                            <span>sélectionnez un produit</span>
+                            <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+
                         </div>
                     </div>
                 </div>
@@ -91,6 +102,7 @@
                     @foreach ($categories as $category)
                         {{-- <a href="{{ Route('categories.index', $category) }}">{{ $category->name }}</a> --}}
                         <div class="md:flex mt-8 md:-mx-4">
+                            <div class="md:w-1/2 md:px-4 mb-4">
                             <div class="w-full h-64 md:mx-4 rounded-md overflow-hidden bg-cover bg-center md:w-1/2"
                                 style="background-image: url('https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
                                 <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
@@ -99,7 +111,7 @@
                                         <p class="mt-2 text-gray-400">{{ $category->description }}</p>
                                         <button
                                             class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none">
-                                            <span><a href="{{ Route('categories.index', $category) }}"> Entrer </a></span>
+                                            <span><a href="{{ Route('products.category',$category->id) }}"> choisir </a></span>
                                             <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round"
                                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                                 stroke="currentColor">
@@ -110,12 +122,12 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                     @endforeach
 
                 <div class="mt-16">
-
                     @foreach ($products as $product)
-                        <h3 class="text-gray-600 text-2xl font-medium"> {{ $product->category->name }} </h3>
+                        {{-- <h3 class="text-gray-600 text-2xl font-medium"> {{ $product->category->name }} </h3> --}}
                         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
                             <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                                 <div class="flex items-end justify-end h-56 w-full bg-cover"
@@ -149,4 +161,13 @@
             </div>
         </footer>
     </div>
+
+    <!-- Ajout de scripts pour activer le carrousel -->
+    <script>
+        // Active le carrousel à l'aide de jQuery (assurez-vous d'inclure jQuery)
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+    </script>
+
 @endsection
